@@ -13,7 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                        <div class="links">
 
+                            <a href="{{ url('/post/blog')}}">Upload document</a>
+                        </div>
                     You are logged in!
                 </div>
             </div>

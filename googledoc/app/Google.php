@@ -9,7 +9,7 @@
 namespace App;
 
 
-class GoogleDoc
+class Google
 {
     public function client()
     {

@@ -14,8 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login/google', 'HomeController@redirectToGoogleProvider');
-Route::get('/login/google/callback', 'HomeController@handleProviderGoogleCallback');
+Route::get('/login/google', 'AuthController@redirectToGoogleProvider');
+Route::get('/login/google/callback', 'AuthController@handleProviderGoogleCallback');
+Route::get('/post/blog', 'GoogleController@handlePost');
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'AuthController@index')->name('home');
