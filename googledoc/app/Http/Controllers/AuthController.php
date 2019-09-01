@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Google;
+use App\Post;
 use Illuminate\Http\Request;
 
 
@@ -17,7 +18,9 @@ class AuthController extends Controller
     }
 
     public function index(){
-        return view('home');
+        $posts = Post::all();
+
+        return view('home')->with('posts',$posts);
     }
 
     public function redirectToGoogleProvider(Google $googleDoc)
@@ -38,7 +41,8 @@ class AuthController extends Controller
             $token = $client->getAccessToken();
             $request->session()->put('access_token',$token);
 
-            return redirect('/home')->with('success','you have been authenticated');
+
+            return redirect('/home')->with('success','post saves successfully');
 
         }
         else{

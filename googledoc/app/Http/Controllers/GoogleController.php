@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Google;
+use App\Post;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GoogleController extends Controller
 {
@@ -79,57 +81,11 @@ class GoogleController extends Controller
                     }
                 }
 
-//connection to wordpress api
-                $username = 'admin';
-                $password = 'admin';
-                $client = new Client([
-                    'base_uri' => 'http://localhost:8888/wordpress/wp-json/wp/v2/',
-                    'headers' => [
-                        'Authorization' => 'Basic ' . base64_encode($username . ':' . $password),
-                        'Accept' => 'application/json',
-                        'Content-type' => 'application/json',
-                        'Content-Disposition' => 'attachment',
-                    ]
+                \DB::table('posts')->insert([
+                'title' => $doc->getTitle(),
+                'body' => implode("", $datas),
+                'image' => $image_url
                 ]);
-
-                // uploading featured image to wordpress media and getting id
-
-                $name = $doc->getTitle() . '.' . 'jpg';
-                $responses = $client->post(
-                    'media',
-                    [
-                        'multipart' => [
-                            [
-                                'name' => 'file',
-                                'contents' => file_get_contents($image_url),
-                                'filename' => $name
-                            ],
-
-                        ]
-                    ]);
-                $image_id_wp = json_decode($responses->getBody(), true);
-
-// uploading post to wordpress with featured image id
-
-                $response = $client->post('posts', [
-                    'multipart' => [
-                        [
-                            'name' => 'title',
-                            'contents' => $doc->getTitle()
-                        ],
-                        [
-                            'name' => 'content',
-                            'contents' => implode("", $datas)
-                        ],
-
-                        [
-                            'name' => 'featured_media',
-                            'contents' => $image_id_wp['id']
-                        ],
-
-                    ]
-                ]);
-
             }
             return redirect('/home')->with('success','post has been created');
 

@@ -68,9 +68,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <a href="{{ url('/login/google') }}">Home</a>
+                    <a href="{{ url('/login/google') }}">Authentication</a>
                 </div>
-
+            </div>
         </div>
     </body>
 </html>
