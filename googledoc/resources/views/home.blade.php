@@ -13,7 +13,7 @@
             @endif
 
             <div class="links">
-                <a href="{{ url('/post/blog')}}">get post form drive</a>
+                <a href="{{ url('/post/blog')}}">get post from drive</a>
 
             </div>
             You are logged in!
@@ -21,6 +21,7 @@
     </div>
     </br>
     </br>
+    <h1>POSTS FROM DRIVE</h1>
     <div class="row ">
         </br>
         @foreach($posts as $post)
@@ -28,7 +29,7 @@
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title"> <a href="{{ url('/post/wp',$post->id)}}">{{$post->title}}</a></h5>
-                        <p class="card-text">testekjydduuyfug</p>
+                        <p class="card-text"></p>
                     </div>
                 </div>
         </div>

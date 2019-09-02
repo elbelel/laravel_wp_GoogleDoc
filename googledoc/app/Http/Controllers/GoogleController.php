@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Google;
-use App\Post;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class GoogleController extends Controller
 {
